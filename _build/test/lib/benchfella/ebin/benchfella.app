@@ -1,0 +1,11 @@
+{application,benchfella,
+             [{registered,[]},
+              {description,"Microbenchmarking tool for Elixir."},
+              {vsn,"0.3.3"},
+              {modules,['Elixir.Benchfella','Elixir.Benchfella.CLI.Util',
+                        'Elixir.Benchfella.Counter','Elixir.Benchfella.Json',
+                        'Elixir.Benchfella.Snapshot',
+                        'Elixir.Benchfella.Snapshot.Formatter',
+                        'Elixir.Mix.Tasks.Bench','Elixir.Mix.Tasks.Bench.Cmp',
+                        'Elixir.Mix.Tasks.Bench.Graph']},
+              {applications,[kernel,stdlib,elixir]}]}.

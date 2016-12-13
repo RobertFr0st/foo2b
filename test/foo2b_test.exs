@@ -1,0 +1,30 @@
+defmodule Foo2bTest do
+  use ExUnit.Case, async: true
+
+  describe "correctly hashes message" do
+
+    test "single block input" do
+      assert Foo2b.foo2b('abc', 3) =='BA80A53F981C4D0D6A2797B69F12F6E94C212F14685AC4B74B12BB6FDBFFA2D17D87C5392AAB792DC252D5DE4533CC9518D38AA8DBF1925AB92386EDD4009923'
+    end
+
+    test "many block input" do
+      assert Foo2b.foo2b(List.duplicate(?a, 10000), 10000) =='CE848964DB0EC8441DCA3DFFBECE84AD44EDA43C524C3EC88C9BBEF744019C04243342EFC05EAED1004DB2D80C0117AE6F7C3BEF7B49970C9C524A9927022FEA'
+    end
+
+    test "different byte output" do
+      assert Foo2b.foo2b('abc', 3, 64, 32) =='BDDD813C634239723171EF3FEE98579B94964E3BB1CB3E427262C8C068D52319'
+    end
+
+    test "output hex count is not a multiple of 8" do
+      assert Foo2b.foo2b('abc', 3, 31) =='BA80A53F981C4D0D6A2797B69F12F6E'
+    end
+
+    test "zero should prepend first block of output" do
+      assert Foo2b.foo2b('needmorecoffee', 14) =='0475F092D308C2FD459023EA40E06D706DECCEF966129F85CE1D87E205B653D298E00549D03E5078CD72787166C28AFC5700A8BC10E84AFB71F1F5F9E19445C2'
+    end
+
+    test "10,000 a's with key" do
+      assert Foo2b.foo2b(List.duplicate(?a, 10000), 10000, 128, 64, 'supersecret') =='BFA3BFFC7F87666BC498AC0E50BA2762F5637B7AE1CB3CA3A11AA051B3B6BEC3E4CC66B002C259887287D47801D5B54BD93348ECEBEF92C1EAE28BA1B34B2AF6'
+    end
+  end
+end
